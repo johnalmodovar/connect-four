@@ -53,7 +53,7 @@ function makeHtmlBoard() {
     for (let x = 0; x < WIDTH; x++) {
       const cell = document.createElement("td");
       // you'll use this later, so make sure you use c-y-x
-      cell.setAttribute("id", `c-${y}-${x}`);//FIXME: pay attention to these variables */
+      cell.setAttribute("id", `c-${y}-${x}`);
       rowElement.append(cell);
     }
     htmlBoard.append(rowElement);
@@ -78,7 +78,6 @@ create another class for it whether the current player is 1 or 2
 */
 
 function placeInTable(y, x) {
-  // TODO: make a div and insert into correct table cell
   let playerCell = document.createElement("div");
   playerCell.classList.add("piece");
   playerCell.classList.add(`p-${currPlayer}`);
@@ -90,13 +89,14 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  var x = +evt.target.id;
+  let x = +evt.target.id;
 
   // get next spot in column (if none, ignore click)
   var y = findSpotForCol(x);
@@ -106,6 +106,7 @@ function handleClick(evt) {
 
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
+  board[y][x] = currPlayer;
   placeInTable(y, x);
 
   // check for win
@@ -113,11 +114,23 @@ function handleClick(evt) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
+  //FIXME:
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+    //every td should have a div in it
+    let cells = document.querySelectorAll("td");
+    //does it have a class of piece
+    if(cells.every(cell => cell.classList.includes("piece"))){
+      endGame("TIE");
+    }
 
-  // switch players
+    // switch players
   // TODO: switch currPlayer 1 <-> 2
+  if(currPlayer === 1){
+    currPlayer = 2;
+  }else{
+    currPlayer = 1;
+  }
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
