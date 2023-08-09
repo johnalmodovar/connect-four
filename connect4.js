@@ -18,7 +18,6 @@ const board = []; // array of rows, each row is array of cells  (board[y][x])
  */
 
 function makeBoard() {
-  // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   for(let i = 0; i < HEIGHT; i++){
     let boardRow = Array.from({length: WIDTH}).fill(null);
     board.push(boardRow);
@@ -30,12 +29,10 @@ function makeBoard() {
 function makeHtmlBoard() {
   const htmlBoard = document.getElementById('board');
 
-  // TODO: add comment for this code
   // creating top row of game where player pushes to input their game piece
   const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
 
-  // TODO: add comment for this code
   // looping to create the elements for the top row
   for (let x = 0; x < WIDTH; x++) {
     const headCell = document.createElement("td");
@@ -49,21 +46,16 @@ function makeHtmlBoard() {
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
   for (let y = 0; y < HEIGHT; y++) {
-    // TODO: Create a table row element and assign to a "row" variable
     const rowElement = document.createElement("tr");
     rowElement.setAttribute("id", `row-${y}`);
 
 
     for (let x = 0; x < WIDTH; x++) {
-      // TODO: Create a table cell element and assign to a "cell" variable
       const cell = document.createElement("td");
-      // TODO: add an id, c-y-x, to the above table cell element
       // you'll use this later, so make sure you use c-y-x
       cell.setAttribute("id", `c-${y}-${x}`);//FIXME: pay attention to these variables */
-      // TODO: append the table cell to the table row
       rowElement.append(cell);
     }
-    // TODO: append the row to the html board
     htmlBoard.append(rowElement);
   }
 }
@@ -77,8 +69,21 @@ function findSpotForCol(x) {
 
 /** placeInTable: update DOM to place piece into HTML table of board */
 
+//psuedo:
+/*
+creating a div in the correct cell in the html game board
+create a class for it called piece
+create another class for it whether the current player is 1 or 2
+  p1 or p2
+*/
+
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  let playerCell = document.createElement("div");
+  playerCell.classList.add("piece");
+  playerCell.classList.add(`p-${currPlayer}`);
+  let cell = document.getElementById(`c-${y}-${x}`);
+  cell.append(playerCell);
 }
 
 /** endGame: announce game end */
