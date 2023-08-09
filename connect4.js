@@ -7,11 +7,11 @@
  * board fills (tie)
  */
 
-var WIDTH = 7;
-var HEIGHT = 6;
+const WIDTH = 7;
+const HEIGHT = 6;
 
-var currPlayer = 1; // active player: 1 or 2
-var board = []; // array of rows, each row is array of cells  (board[y][x])
+const currPlayer = 1; // active player: 1 or 2
+const board = []; // array of rows, each row is array of cells  (board[y][x])
 
 /** makeBoard: create in-JS board structure:
  *    board = array of rows, each row is array of cells  (board[y][x])
@@ -24,16 +24,18 @@ function makeBoard() {
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
-  var htmlBoard = document.getElementById('board');
+  const htmlBoard = document.getElementById('board');
 
   // TODO: add comment for this code
-  var top = document.createElement("tr");
+  // creating top row of game where player pushes to input their game piece
+  const top = document.createElement("tr");
   top.setAttribute("id", "column-top");
-  
+
   // TODO: add comment for this code
-  for (var x = 0; x < WIDTH; x++) {
-    var headCell = document.createElement("td");
-    headCell.setAttribute("id", `top-${x}`);
+  // looping to create the elements for the top row
+  for (let i = 0; i < WIDTH; i++) {
+    const headCell = document.createElement("td");
+    headCell.setAttribute("id", `top-${i}`);
     headCell.addEventListener("click", handleClick);
     top.append(headCell);
   }
@@ -42,10 +44,13 @@ function makeHtmlBoard() {
   // dynamically creates the main part of html board
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
-  for (var y = 0; y < HEIGHT; y++) {
+  for (let i = 0; i < HEIGHT;i++) {
     // TODO: Create a table row element and assign to a "row" variable
+    const rowElement = document.createElement("tr");
+    rowElement.setAttribute("id", `row-${i}`);
+    htmlBoard.append(rowElement);
 
-    for (var x = 0; x < WIDTH; x++) {
+    for (let j = 0; j < WIDTH; j++) {
       // TODO: Create a table cell element and assign to a "cell" variable
 
       // TODO: add an id, c-y-x, to the above table cell element
