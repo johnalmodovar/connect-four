@@ -62,9 +62,20 @@ function makeHtmlBoard() {
 
 /** findSpotForCol: given column x, return bottom empty y (null if filled) */
 
+/*
+find lowest empty spot in game board
+return y coordinate
+*/
+
 function findSpotForCol(x) {
-  // TODO: write the real version of this, rather than always returning 5
-  return 5;
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (board[y][x] !== "null") {
+      // debugger;
+      return y;
+    }
+  }
+  // debugger;
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -83,12 +94,12 @@ function placeInTable(y, x) {
   playerCell.classList.add(`p-${currPlayer}`);
   let cell = document.getElementById(`c-${y}-${x}`);
   cell.append(playerCell);
+  // debugger;
 }
 
 /** endGame: announce game end */
 
 function endGame(msg) {
-  // TODO: pop up alert message
   alert(msg);
 }
 
@@ -96,17 +107,19 @@ function endGame(msg) {
 
 function handleClick(evt) {
   // get x from ID of clicked cell
-  let x = +evt.target.id;
+  let x = parseInt(evt.target.id.slice(evt.target.id.length - 1));
+  // console.log(evt.target.id.length-1)
+  // debugger;
 
   // get next spot in column (if none, ignore click)
-  var y = findSpotForCol(x);
+  let y = findSpotForCol(x);
   if (y === null) {
     return;
   }
 
   // place piece in board and add to HTML table
-  // TODO: add line to update in-memory board
   board[y][x] = currPlayer;
+  // debugger;
   placeInTable(y, x);
 
   // check for win
@@ -114,18 +127,16 @@ function handleClick(evt) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
-  //FIXME:
   // check for tie
-  // TODO: check if all cells in board are filled; if so call, call endGame
     //every td should have a div in it
     let cells = document.querySelectorAll("td");
     //does it have a class of piece
     if(cells.every(cell => cell.classList.includes("piece"))){
+      debugger;
       endGame("TIE");
     }
 
     // switch players
-  // TODO: switch currPlayer 1 <-> 2
   if(currPlayer === 1){
     currPlayer = 2;
   }else{
