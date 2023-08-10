@@ -88,6 +88,8 @@ create another class for it whether the current player is 1 or 2
   p1 or p2
 */
 
+// FIXME: make sure player cell is appending to different cells.
+// FIXME: make sure current player is cycling correctly.
 function placeInTable(y, x) {
   let playerCell = document.createElement("div");
   playerCell.classList.add("piece");
@@ -127,6 +129,7 @@ function handleClick(evt) {
     return endGame(`Player ${currPlayer} won!`);
   }
 
+  // FIXME: use JS gameboard NOT DOM gameboard line 137
   // check for tie
     //every td should have a div in it
     let cells = document.querySelectorAll("td");
